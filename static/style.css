@@ -1,0 +1,46 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.page-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.sub-nav {
+    border-bottom: 1px solid #dee2e6;
+}
+.sub-nav .nav-tabs .nav-link {
+    color: #007bff;
+}
+.sub-nav .nav-tabs .nav-link.active {
+    font-weight: bold;
+    background-color: #e9ecef;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.dashboard-link {
+  letter-spacing: 9px;
+}
+
+.sidebar {
+    position: sticky;
+    height: calc(100vh - 202px);
+    overflow-y: auto;
+}
+
+.user-info {
+  font-weight: bold;
+}
+

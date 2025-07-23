@@ -1,0 +1,56 @@
+{
+    "Inventory": [
+        {
+            "name": "salt.box",
+            "ip": "192.168.1.1",
+            "status": "Online"
+        },
+        {
+            "name": "Inconnu",
+            "ip": "192.168.1.2",
+            "status": "Offline"
+        },
+        {
+            "name": "Inconnu",
+            "ip": "192.168.1.3",
+            "status": "Offline"
+        },
+        {
+            "name": "Inconnu",
+            "ip": "192.168.1.4",
+            "status": "Offline"
+        },
+        {
+            "name": "Inconnu",
+            "ip": "192.168.1.5",
+            "status": "Offline"
+        },
+        {
+            "name": "Chambre",
+            "ip": "192.168.1.6",
+            "status": "Online"
+        },
+        {
+            "name": "iPhone",
+            "ip": "192.168.1.7",
+            "status": "Offline"
+        },
+        {
+            "name": "Inconnu",
+            "ip": "192.168.1.8",
+            "status": "Offline"
+        },
+        {
+            "name": "Inconnu",
+            "ip": "192.168.1.9",
+            "status": "Offline"
+        },
+        {
+            "name": "lwip0",
+            "ip": "192.168.1.10",
+            "status": "Offline"
+        }
+    ],
+    "Maintenance": [],
+    "Vendors": []
+}

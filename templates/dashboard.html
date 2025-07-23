@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <p>
+                    Bienvenue, <strong>{{ user['username'] }}</strong> sur le tableau de bord du système interne de GBNews.
+                </p>
+                <p>
+                    Ce système a été développé pour répondre aux besoins internes de l'entreprise à travers les fonctionnalités suivantes :
+                </p>
+                <ul>
+                    <li>Gestion centralisée des utilisateurs avec authentification sécurisée.</li>
+                    <li>Accès aux contenus spécifiques selon les départements (Production IT, Développement, Matériel).</li>
+                    <li>Suivi en temps réel de l’état des équipements (connectés ou non connectés).</li>
+                    <li>Affichage des détails techniques des appareils et des machines virtuelles.</li>
+                    <li>Interface intuitive et architecture sécurisée basée sur Firestore.</li>
+                </ul>
+            </div>
+
+            <div class="col-md-4">
+                <img src="{{ url_for('static', filename='images/dashboard_background.jpg') }}"
+                    alt="Dashboard Background"
+                    class="img-fluid">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<script src="{{ url_for('static', filename='script.js') }}" defer></script>
