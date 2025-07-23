@@ -43,4 +43,12 @@ footer {
 .user-info {
   font-weight: bold;
 }
+.sub-nav .nav-tabs .nav-link,
+.nav-link {
+  color: #0f9dd3;
+  font-weight: bold;
+}
 
+a:hover {
+  color: #035675;
+}
