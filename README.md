@@ -35,7 +35,3 @@ gbnews_network_project/
 │   ├── it-development.html
 │   └── it-devices.html
 # gbnews_network_project
-# gbnews_network_project
-# gbnews_network_status_project
-# gbnews_network_status_project
-# gbnews_network_project
