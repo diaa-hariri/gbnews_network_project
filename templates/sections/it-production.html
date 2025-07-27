@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-left mb-4">IT Production</h1>
+
+    <h3>Services</h3>
+
+    <button id="showFormBtn" class="btn btn-primary mb-3">Ajouter un service</button>
+
+    <form id="addServiceForm" method="post" style="display:none;">
+        <div class="mb-3">
+            <label for="service_name" class="form-label">Nom du service</label>
+            <input type="text" class="form-control" id="service_name" name="service_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="service_description" class="form-label">Description du service</label>
+            <textarea class="form-control" id="service_description" name="service_description" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="device_name" class="form-label">Nom de l'appareil</label>
+            <select class="form-select" id="device_name" name="device_name" required>
+                <option value="" disabled selected>Choisissez un appareil</option>
+                {% for name in device_names %}
+                    <option value="{{ name }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="assigned_to" class="form-label">Assigné à</label>
+            <select class="form-select" id="assigned_to" name="assigned_to" required>
+                <option value="" disabled selected>Choisissez un utilisateur</option>
+                {% for user in user_list %}
+                    <option value="{{ user }}">{{ user }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Ajouter</button>
+    </form>
+
+    <div id="servicesList" class="mt-4">
+        {% if services %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nom du service</th>
+                            <th>Description</th>
+                            <th>Appareil</th>
+                            <th>Ajouté par</th>
+                            <th>Date d'ajout</th>
+                            <th>Attribué à</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for service in services %}
+                            <tr>
+                                <td>{{ service.nom_service }}</td>
+                                <td>{{ service.description_service }}</td>
+                                <td>{{ service.device_name or "Non spécifié" }}</td>
+                                <td>{{ service.ajoute_par }}</td>
+                                <td>{{ service.date_ajout }}</td>
+                                <td>{{ service.assigne_a or "Non spécifié" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>Aucun service ajouté pour le moment.</p>
+        {% endif %}
+    </div>
+
+
+<script>
+    document.getElementById('showFormBtn').addEventListener('click', function() {
+        const form = document.getElementById('addServiceForm');
+        form.style.display = (form.style.display === 'none') ? 'block' : 'none';
+    });
+</script>
+
+<script src="{{ url_for('static', filename='script.js') }}" defer></script>
+{% endblock %}

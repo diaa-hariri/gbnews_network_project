@@ -1,0 +1,18 @@
+[
+    {
+        "nom_service": "Description du service ",
+        "description_service": "Description du service Description du service ",
+        "device_name": "iPhone",
+        "date_ajout": "2025-07-27 02:01:44",
+        "ajoute_par": "Diaa Alhariri",
+        "assigne_a": "Diaa Alhariri"
+    },
+    {
+        "nom_service": "test",
+        "description_service": "test",
+        "device_name": "26:aa:23:02:17:84",
+        "date_ajout": "2025-07-27 21:30:28",
+        "ajoute_par": "Diaa Alhariri",
+        "assigne_a": "Miguel"
+    }
+]

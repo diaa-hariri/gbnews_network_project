@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body class="page-body">
@@ -21,6 +22,11 @@
                 <a class="navbar-brand" href="{{ url_for('dashboard') }}">Dashboard</a>
             </div>
         </div>
+        
+        <div class="mx-auto text-center position-absolute w-100" style="left: 0; right: 0; top: 50%; transform: translateY(-50%); pointer-events: none;">
+            <h1 class="mb-0" style="font-size: 1.8rem;">IT Services Catalogue</h1>
+        </div>
+
         <div class="navbar-collapse collapse justify-content-end order-lg-1 order-1">
             {% if session.get('user') %}
                 <div class="user-info">
@@ -49,15 +55,28 @@
             {% if session.get('user') %}
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-4">
                 <div class="sidebar-sticky">
+                    <strong style="margin-left: 1rem; margin-bottom: 1rem; display: block;">SERVICES</strong>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_production_index') }}">IT Production</a>
+                            <a class="nav-link" href="{{ url_for('it_production.it_production_index') }}">IT Production</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_development_index') }}">IT Development</a>
+                            <a class="nav-link" href="{{ url_for('it_development.it_development_index') }}">IT Development</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_devices_index') }}">IT Devices</a>
+                            <a class="nav-link" href="{{ url_for('it_backup.it_backup_index') }}">IT BackUp</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('it_improvement.it_improvement_index') }}">IT Amélioration Continue</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('it_continuity.it_continuity_index') }}">Continuité des activités</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('it_decision.it_decision_index') }}">PV et décisions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('inventory.inventory') }}">Inventaire</a>
                         </li>
                     </ul>
                 </div>

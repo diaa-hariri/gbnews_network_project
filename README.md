@@ -1,37 +1,54 @@
 gbnews_network_project/
 │
-├── app.py
-├── README.md
+├── app.py                     
+├── README.md                
 │
-├── config/
+├── data/                      
+│   ├── database.json
+│   ├── users.json            
+│   ├── services_development.json
+│   └── services_production.json
+│
+├── routes/                   
 │   ├── __init__.py
-│   ├── firestore_db.py
-│   └── gbnews_project.json
-│
-├── routes/
-│   └── users/
+│   ├── pages/                 
+│   │   ├── __init__.py
+│   │   ├── inventory.py
+│   │   ├── it_backup.py
+│   │   ├── it_continuity.py
+│   │   ├── it_decision.py
+│   │   ├── it_development.py
+│   │   ├── it_improvement.py
+│   │   └── it_production.py
+│   └── users/            
 │       ├── __init__.py
 │       ├── login.py
 │       └── register.py
 │
-├── data/
-│   └── database.json
-│
-├── scripts/
+├── scripts/                 
+│   ├── __init__.py
 │   └── generate_devices_json.py
 │
-├── static/
-│   ├── style.css
-│   ├── script.js
+├── static/                
+│   ├── css/
+│   │   └── style.css
+        └── auth.css
+│   ├── js/
+│   │   └── script.js
 │   └── images/
+│       └── (image files...)
 │
-├── templates/
+├── templates/               
 │   ├── base.html
-│   ├── dashboard.html
+│   ├── footer.html
 │   ├── login.html
 │   ├── register.html
-│   ├── footer.html
-│   ├── it-production.html
-│   ├── it-development.html
-│   └── it-devices.html
-# gbnews_network_project
+│   ├── dashboard.html
+│   └── sections/
+│       ├── inventory.html
+│       ├── it-backup.html
+│       ├── it-continuity.html
+│       ├── it-decision.html
+│       ├── it-development.html
+│       ├── it-improvement.html
+│       └── it-production.html

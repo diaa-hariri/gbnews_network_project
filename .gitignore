@@ -1,4 +1,3 @@
 venv/
-config/gbnew_project.json
 *.log
 __pycache__/

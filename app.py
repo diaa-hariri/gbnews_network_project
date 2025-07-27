@@ -4,13 +4,27 @@ from functools import wraps
 from datetime import datetime
 import json
 
-from config.firestore_db import db
 from routes.users.login import login_user
 from routes.users.register import register_user
+from routes.pages.inventory import inventory_bp
+from routes.pages.it_production import it_production_bp
+from routes.pages.it_development import it_development_bp
+from routes.pages.it_backup import it_backup_bp
+from routes.pages import it_continuity_bp
+from routes.pages.it_improvement import it_improvement_bp
+from routes.pages.it_decision import it_decision_bp
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
+
+app.register_blueprint(inventory_bp)
+app.register_blueprint(it_production_bp)
+app.register_blueprint(it_development_bp)
+app.register_blueprint(it_backup_bp)
+app.register_blueprint(it_continuity_bp)
+app.register_blueprint(it_improvement_bp)
+app.register_blueprint(it_decision_bp)
 
 CURR_DIR = os.path.dirname(__file__)
 
@@ -18,7 +32,7 @@ def authenticated(f):
     @wraps(f)
     def inner_func(*args, **kwargs):
         if 'user' not in session:
-            flash('Please log in to access the dashboard.', 'warning')
+            flash('Veuillez vous connecter pour accéder au tableau de bord.', 'warning')
             return redirect(url_for('login'))
         return f(*args, **kwargs)
     return inner_func
@@ -30,238 +44,6 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     return register_user(request)
-
-@app.route('/it_production')
-@authenticated
-def it_production_index():
-    return render_template(
-        'it-production.html',
-        user=session['user'],
-    )
-
-@app.route('/it_production/inventory')
-@authenticated
-def it_production_inventory():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Inventory", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-production.html',
-        user=session['user'],
-        active_tab='inventory',
-        devices=devices
-    )
-@app.route('/it_production/maintenance')
-@authenticated
-def it_production_maintenance():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Maintenance", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-production.html',
-        user=session['user'],
-        active_tab='maintenance',
-        devices=devices
-    )
-
-@app.route('/it_production/vendors')
-@authenticated
-def it_production_vendors():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Vendors", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-production.html',
-        user=session['user'],
-        active_tab='vendors',
-        devices=devices
-    )
-
-@app.route('/it_development')
-@authenticated
-def it_development_index():
-    return render_template(
-        'it-development.html',
-        user=session['user'],
-    )
-
-@app.route('/it_development/inventory')
-@authenticated
-def it_development_inventory():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Inventory", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-development.html',
-        user=session['user'],
-        active_tab='inventory',
-        devices=devices
-    )
-
-@app.route('/it_development/maintenance')
-@authenticated
-def it_development_maintenance():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Maintenance", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-development.html',
-        user=session['user'],
-        active_tab='maintenance',
-        devices=devices
-    )
-
-@app.route('/it_development/vendors')
-@authenticated
-def it_development_vendors():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Vendors", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-development.html',
-        user=session['user'],
-        active_tab='vendors',
-        devices=devices
-    )
-
-@app.route('/it_devices')
-@authenticated
-def it_devices_index():
-    return render_template(
-        'it-devices.html',
-        user=session['user'],
-    )
-
-@app.route('/it_devices/inventory')
-@authenticated
-def it_devices_inventory():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Inventory", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-devices.html',
-        user=session['user'],
-        active_tab='inventory',
-        devices=devices
-    )
-
-
-@app.route('/it_devices/maintenance')
-@authenticated
-def it_devices_maintenance():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Maintenance", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-devices.html',
-        user=session['user'],
-        active_tab='maintenance',
-        devices=devices
-    )
-
-@app.route('/it_devices/vendors')
-@authenticated
-def it_devices_vendors():
-    json_path = os.path.join(CURR_DIR, 'data/database.json')
-
-    devices = []
-    if os.path.exists(json_path):
-        with open(json_path) as f:
-            try:
-                content = f.read().strip()
-                if content:
-                    data = json.loads(content)
-                    devices = data.get("Vendors", [])
-            except json.JSONDecodeError:
-                flash("Erreur de format dans le fichier JSON des appareils.", "danger")
-
-    return render_template(
-        'it-devices.html',
-        user=session['user'],
-        active_tab='vendors',
-        devices=devices
-    )
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -278,7 +60,7 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.pop('user', None)
-    flash('Logged out successfully!', 'success')
+    flash('Déconnexion réussie!', 'success')
     return redirect(url_for('login'))
 
 @app.context_processor

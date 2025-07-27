@@ -1,11 +1,20 @@
+import json
+import os
 from flask import render_template, redirect, url_for, flash, session
+
 from werkzeug.security import check_password_hash
-from config.firestore_db import db
+
+USERS_FILE = os.path.join('data', 'users.json')
 
 def get_user_by_email(email):
-    users_ref = db.collection('users').where('email', '==', email).limit(1).stream()
-    for user in users_ref:
-        return user.to_dict()  
+    if not os.path.exists(USERS_FILE):
+        return None
+
+    with open(USERS_FILE, 'r') as f:
+        users = json.load(f)
+        for user in users:
+            if user['email'] == email:
+                return user
     return None
 
 def login_user(request, session):
@@ -19,9 +28,9 @@ def login_user(request, session):
         user = get_user_by_email(email)
         if user and check_password_hash(user['password'], password):
             session['user'] = {'email': email, 'username': user['username']}
-            flash('Logged in successfully!', 'success')
+            flash('Connexion réussie !', 'success')
             return redirect(url_for('dashboard'))
 
-        flash('Invalid email or password', 'danger')
+        flash('Adresse e-mail ou mot de passe invalide', 'danger')
 
     return render_template('login.html')
