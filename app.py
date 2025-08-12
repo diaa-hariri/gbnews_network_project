@@ -2,29 +2,24 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 import os
 from functools import wraps
 from datetime import datetime
-import json
 
 from routes.users.login import login_user
 from routes.users.register import register_user
-from routes.pages.inventory import inventory_bp
-from routes.pages.it_production import it_production_bp
-from routes.pages.it_development import it_development_bp
-from routes.pages.it_backup import it_backup_bp
-from routes.pages import it_continuity_bp
-from routes.pages.it_improvement import it_improvement_bp
-from routes.pages.it_decision import it_decision_bp
+from routes.pages.products import products_bp
+from routes.pages.clients import clients_bp
+from routes.pages.users import users_bp
+from routes.pages.invoices import invoices_bp
+
+
 
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-app.register_blueprint(inventory_bp)
-app.register_blueprint(it_production_bp)
-app.register_blueprint(it_development_bp)
-app.register_blueprint(it_backup_bp)
-app.register_blueprint(it_continuity_bp)
-app.register_blueprint(it_improvement_bp)
-app.register_blueprint(it_decision_bp)
+app.register_blueprint(products_bp)
+app.register_blueprint(clients_bp)
+app.register_blueprint(users_bp)
+app.register_blueprint(invoices_bp)
 
 CURR_DIR = os.path.dirname(__file__)
 

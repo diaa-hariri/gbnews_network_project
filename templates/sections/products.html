@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-left mb-4">Produits</h1>
+
+    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addProductModal">
+        Ajouter un produit
+    </button>
+
+    <div id="productsList" class="mt-4">
+        {% if products %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom du produit</th>
+                            <th>Description</th>
+                            <th>Prix (CHF)</th>
+                            <th>Image</th>
+                            <th>Type de quantité</th>
+                            <th>Nombre de cartons</th>
+                            <th>Pièces par carton</th>
+                            <th>Total pièces</th>
+                            <th>Ajouté par</th>
+                            <th>Date d'ajout</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product['id'] }}</td>
+                                <td>{{ product['product_name'] }}</td>
+                                <td>{{ product['product_description'] }}</td>
+                                <td>{{ product['product_price'] }} CHF</td>
+                                <td>
+                                    {% if product['image_filename'] %}
+                                        <img src="{{ url_for('static', filename='images/products/' + product['image_filename']) }}" alt="Image du produit" style="width: 60px; height: auto;">
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>{{ product['quantity_type'] }}</td>
+                                <td>{{ product['number_of_cartons'] or '—' }}</td>
+                                <td>{{ product['pieces_per_carton'] or '—' }}</td>
+                                <td>{{ product['total_pieces'] }}</td>
+                                <td>{{ product['added_by'] }}</td>
+                                <td>{{ product['date_added'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>Aucun produit ajouté pour le moment.</p>
+        {% endif %}
+    </div>
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form method="post" enctype="multipart/form-data" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Ajouter un nouveau produit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="product_name" class="form-label">Nom du produit</label>
+                        <input type="text" class="form-control" id="product_name" name="product_name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_description" class="form-label">Description du produit</label>
+                        <textarea class="form-control" id="product_description" name="product_description" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="product_price" class="form-label">Prix du produit (CHF)</label>
+                        <input type="number" step="0.01" min="0" class="form-control" id="product_price" name="product_price" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image_file" class="form-label">Image du produit</label>
+                        <input type="file" class="form-control" id="image_file" name="image_file" accept="image/*" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity_type" class="form-label">Type de quantité</label>
+                        <select class="form-select" id="quantity_type" name="quantity_type" required onchange="toggleCartonInput()">
+                            <option value="pieces">Pièces</option>
+                            <option value="cartons">Cartons</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="quantity_in_stock" class="form-label">Quantité</label>
+                        <input type="number" min="1" class="form-control" id="quantity_in_stock" name="quantity_in_stock" required>
+                    </div>
+
+                    <div class="mb-3" id="carton_details" style="display: none;">
+                        <label for="pieces_per_carton" class="form-label">Nombre de pièces par carton</label>
+                        <input type="number" min="1" class="form-control" id="pieces_per_carton" name="pieces_per_carton">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Ajouter</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleCartonInput() {
+    const type = document.getElementById('quantity_type').value;
+    const details = document.getElementById('carton_details');
+    details.style.display = (type === 'cartons') ? 'block' : 'none';
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="invoice-detail">
+            
+            <p><strong>Al Nour Market</strong></p>
+            <p><strong>Date:</strong> {{ invoice.invoice_date }}</p>
+            <p><strong>Ajouté par:</strong> {{ invoice.added_by }}</p>
+            <p><strong>Facture n°:</strong> {{ invoice.invoice_number }}</p>
+            <p><strong>Montant total:</strong> {{ invoice.total_amount }} CHF</p>
+        </div>
+        <div class="invoice-client-detail">
+            <p><strong>Nom:</strong> {{ invoice.client_name }}</p>
+            <p><strong>Email:</strong> {{ invoice.client_email }}</p>
+            <p><strong>Téléphone:</strong> {{ invoice.client_phone }}</p>
+            
+        </div>
+    </div>
+    <hr>
+    <h4>Articles</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unit_price }} CHF</td>
+                <td>{{ item.line_total }} CHF</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('invoices.invoices_list') }}" class="btn btn-secondary">Retour</a>
+</div>
+{% endblock %}
+

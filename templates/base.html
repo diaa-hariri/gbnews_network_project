@@ -55,28 +55,18 @@
             {% if session.get('user') %}
             <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar py-4">
                 <div class="sidebar-sticky">
-                    <strong style="margin-left: 1rem; margin-bottom: 1rem; display: block;">SERVICES</strong>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_production.it_production_index') }}">IT Production</a>
+                            <a class="nav-link" href="{{ url_for('products.products_index') }}">Produits</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_development.it_development_index') }}">IT Development</a>
+                            <a class="nav-link" href="{{ url_for('clients.clients_index') }}">Clients</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_backup.it_backup_index') }}">IT BackUp</a>
+                            <a class="nav-link" href="{{ url_for('invoices.invoices_list') }}">Factures</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_improvement.it_improvement_index') }}">IT Amélioration Continue</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_continuity.it_continuity_index') }}">Continuité des activités</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('it_decision.it_decision_index') }}">PV et décisions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('inventory.inventory') }}">Inventaire</a>
+                            <a class="nav-link" href="{{ url_for('users.users_index') }}">Utilisateurs</a>
                         </li>
                     </ul>
                 </div>

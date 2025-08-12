@@ -35,7 +35,7 @@ body {
 
 .shapes:nth-child(1) {
   top: -50px;
-  right: -50px;
+  right: -75px;
   background: linear-gradient(
     90deg,
     rgba(0, 255, 59, 1) 0%,
@@ -45,7 +45,7 @@ body {
 
 .shapes:nth-child(2) {
   bottom: -50px;
-  left: -50px;
+  left: -75px;
   background: linear-gradient(
     90deg,
     rgba(255, 0, 0, 1) 0%,
@@ -151,3 +151,9 @@ body {
   border-radius: unset !important;
   height: 100%;
 }
+
+.close:hover {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+  

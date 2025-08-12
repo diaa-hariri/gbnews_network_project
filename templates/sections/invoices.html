@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Invoice List</h2>
+
+    <a href="{{ url_for('invoices.add_invoice') }}" class="btn btn-primary mb-3">
+        ➕ Add Invoice
+    </a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Client Name</th>
+                <th>Date</th>
+                <th>Number</th>
+                <th>Added By</th>
+                <th>Total Amount</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in invoices %}
+            <tr>
+                <td>{{ f.id }}</td>
+                <td>{{ f.client_name }}</td>
+                <td>{{ f.invoice_date }}</td>
+                <td>{{ f.invoice_number }}</td>
+                <td>{{ f.added_by }}</td>
+                <td>{{ f.total_amount }} CHF</td>
+                <td>
+                    <a href="{{ url_for('invoices.invoice_detail', invoice_id=f.id) }}" class="btn btn-info btn-sm">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
